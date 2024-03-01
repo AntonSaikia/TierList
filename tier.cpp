@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "printdb.h"
 #include "sqlite3/sqlite3.h"
 
 using namespace std;
@@ -60,7 +61,7 @@ int main() {
 
     string tier;
     string item;
-    cout << "Type Item Title to Enter Item or X to Exit" << '\n';
+    cout << "Type Item Title to Enter Item or X to Exit and Display Tier List\n";
     while(getline(cin, item) && item.compare("X")){
         cout << "Type Tier" << '\n';
         getline(cin, tier);
@@ -78,11 +79,13 @@ int main() {
         // Run the SQL (convert the string to a C-String with c_str() )
         rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
 
-        cout << "Type Item Title to Enter Item or X to Exit" << '\n';
+        cout << "Type Item Title to Enter Item or X to Exit and Display Tier List\n";
     }
     
     // Close the SQL connection
     sqlite3_close(db);
+
+    printTier(category);
     
     return 0;
 }
