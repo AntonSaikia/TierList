@@ -33,7 +33,7 @@ vector<string> tier(vector<pair<string, string>> &v, string tier){
 }
 
 int main(){
-    // Pointer to SQLite connection
+    // Pointer to SQLite connections
     sqlite3 *db;
 
     // Save any error messages
@@ -47,18 +47,31 @@ int main(){
 
     // Save the result of opening the file
     rc = sqlite3_open("tier_A.db", &db);
-vector<pair<string, string>> container;
-sql = "SELECT * FROM ANIMES;";
-rc = sqlite3_exec(db, sql.c_str(), callback, &container, &zErrMsg);
 
-if( rc != SQLITE_OK ){
-   fprintf(stderr, "SQL ERROR: %s\n", zErrMsg);
-   sqlite3_free(zErrMsg);
-} else {
-   cout << "Anton's Anime Tier List\n\n";
-   //cout << "Anton's Movies watched in 2024 Tier List\n\n";
-}
-   // Close the SQL connection
+    // Take tier category from console input
+    string category;
+    cout << "Type to select Category\n";
+    cout << "- ANIMES\n";
+    cout << "- MOVIES_2024\n";
+    cin >> category;
+
+    // Save entries to local vector 
+    vector<pair<string, string>> container;
+    sql = "SELECT * FROM " + category + ";";
+    rc = sqlite3_exec(db, sql.c_str(), callback, &container, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        fprintf(stderr, "SQL ERROR: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    }
+    else if(!category.compare("ANIMES")) {
+        cout << "Anton's Anime Tier List\n\n";
+    }
+    else if(!category.compare("MOVIES_2024")) {
+        cout << "Anton's Movies watched in 2024 Tier List\n\n";
+    }
+
+    // Close the SQL connection
     sqlite3_close(db);
 
     vector<string> tierS = tier(container, "S");

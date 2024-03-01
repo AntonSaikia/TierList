@@ -42,6 +42,13 @@ int main() {
     // Save the result of opening the file
     rc = sqlite3_open("tier_A.db", &db);
     
+    // Take tier category from console input
+    string category;
+    cout << "Type to select Category\n";
+    cout << "- ANIMES\n";
+    cout << "- MOVIES_2024\n";
+    getline(cin, category);
+
     if( rc ){
         // Show an error message
         cout << "DB Error: " << sqlite3_errmsg(db) << endl;
@@ -52,20 +59,26 @@ int main() {
     }
 
     string tier;
-    string anime;
-    cout << "Type Anime Title to Enter Anime or X to Exit" << '\n';
-    while(getline(cin, anime) && anime.compare("X")){
+    string item;
+    cout << "Type Item Title to Enter Item or X to Exit" << '\n';
+    while(getline(cin, item) && item.compare("X")){
         cout << "Type Tier" << '\n';
         getline(cin, tier);
 
         // Save SQL insert data
-        sql = "INSERT INTO MOVIES_2024 (Movie, Tier) "  \
-            "VALUES ('" + anime + "','" + tier + "'); " ;
-    
+        if (!category.compare("ANIMES")){
+            sql = "INSERT INTO ANIMES (Anime, Tier) "  \
+                "VALUES ('" + item + "','" + tier + "'); " ;
+        }
+        else if (!category.compare("MOVIES_2024")){
+            sql = "INSERT INTO MOVIES_2024 (Movie, Tier) "  \
+                "VALUES ('" + item + "','" + tier + "'); " ;
+        }
+
         // Run the SQL (convert the string to a C-String with c_str() )
         rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
 
-        cout << "Type Anime Title to Enter Anime or X to Exit" << '\n';
+        cout << "Type Item Title to Enter Item or X to Exit" << '\n';
     }
     
     // Close the SQL connection
