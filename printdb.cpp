@@ -1,3 +1,13 @@
+/**
+ * @printdb.cpp
+ *
+ * Prints a Tierlist from an sqlite database
+ * @version 1.0
+ * @date 01-03-2024
+ * @author A. Saikia
+ *
+ */
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,21 +17,20 @@
 
 using namespace std;
 
+/* Sqlite callback function enter the items into a vector */
 int callback2v(void *p, int size, char **column_text, char **column_name) {
     if (size == 0) return -1;
     auto &container = *static_cast<vector<pair<string, string>>*>(p);
-    if (!column_text[0]) container.push_back(make_pair(column_text[1],column_text[0]));
-    else container.push_back(make_pair(column_text[1],column_text[0]));
+    if (!column_text[0]) {
+        container.push_back(make_pair(column_text[1],column_text[0]));
+    }
+    else {
+        container.push_back(make_pair(column_text[1],column_text[0]));
+    }
     return 0;
 }
 
-void printvector(vector<string> &v){
-    for (const auto &i: v){
-        cout << " " << i << " |";
-    }
-    cout << "\n";
-}
-
+/* Sorts items into tier-specific vectors */
 vector<string> tier(vector<pair<string, string>> &v, string tier){
     vector<string> result;
         for (const auto &i: v){
@@ -32,6 +41,15 @@ vector<string> tier(vector<pair<string, string>> &v, string tier){
     return result;
 }
 
+/* Prints a tier vector */
+void printvector(vector<string> &v){
+    for (const auto &i: v){
+        cout << " " << i << " |";
+    }
+    cout << "\n";
+}
+
+/* Takes data from the sqlite database and prints the entire tierlist*/
 void printTier(string category){
     // Pointer to SQLite connections
     sqlite3 *db;
@@ -67,6 +85,7 @@ void printTier(string category){
     // Close the SQL connection
     sqlite3_close(db);
 
+    // Sort into Tiers
     vector<string> tierS = tier(container, "S");
     vector<string> tierA1 = tier(container, "A+");
     vector<string> tierA2 = tier(container, "A");

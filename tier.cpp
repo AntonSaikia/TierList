@@ -1,3 +1,13 @@
+/**
+ * @tier.cpp
+ *
+ * Generates Tierlists with inputs from the user into an sqlite database and prints them
+ * @version 1.0
+ * @date 01-03-2024
+ * @author A. Saikia
+ *
+ */
+
 #include <iostream>
 #include <string>
 #include "printdb.h"
