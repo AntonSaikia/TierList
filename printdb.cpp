@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <utility>
-#include "sqlite3.h"
+#include "sqlite3/sqlite3.h"
 
 using namespace std;
 
