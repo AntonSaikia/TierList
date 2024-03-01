@@ -28,8 +28,7 @@ vector<string> tier(vector<pair<string, string>> &v, string tier){
             if(!tier.compare(i.first)){
                 result.push_back(i.second);
             }
-    }
-
+        }
     return result;
 }
 
