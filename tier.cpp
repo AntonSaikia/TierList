@@ -5,29 +5,7 @@
 
 using namespace std;
 
-// Create a callback function  
-int callback(void *data, int argc, char **argv, char **azColName){
-    fprintf(stderr, "%s: ", (const char*)data);
-    // int argc: holds the number of results
-    // (array) azColName: holds each column returned
-    // (array) argv: holds each value
-
-    for(int i = 0; i < argc; i++) {
-        
-        // Show column name, value, and newline
-        cout << azColName[i] << ": " << argv[i] << endl;
-    
-    }
-
-    // Insert a newline
-    cout << endl;
-
-    // Return successful
-    return 0;
-}
-  
 int main() {
-
     // Pointer to SQLite connection
     sqlite3 *db;
 
@@ -77,7 +55,7 @@ int main() {
         }
 
         // Run the SQL (convert the string to a C-String with c_str() )
-        rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+        rc = sqlite3_exec(db, sql.c_str(), 0, 0, &zErrMsg);
 
         cout << "Type Item Title to Enter Item or X to Exit and Display Tier List\n";
     }
