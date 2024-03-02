@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <vector>
-#include "printdb.h"
+#include "printdb.hpp"
 #include "sqlite3/sqlite3.h"
 
 /* Sqlite callback function enter the items into a vector */
