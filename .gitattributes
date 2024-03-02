@@ -1,0 +1,2 @@
+*.cpp linguist-detectable
+*.cpp linguist-language=c++
