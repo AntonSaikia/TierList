@@ -11,7 +11,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <utility>
 #include "printdb.h"
 #include "sqlite3/sqlite3.h"
 
@@ -19,23 +18,26 @@ using namespace std;
 
 /* Sqlite callback function enter the items into a vector */
 int callback2v(void *p, int size, char **column_text, char **column_name) {
+    TierItem DBitem;
     if (size == 0) return -1;
-    auto &container = *static_cast<vector<pair<string, string>>*>(p);
+    auto &container = *static_cast<vector<TierItem>*>(p);
+    DBitem.item = column_text[0];
+    DBitem.tier = column_text[1];
     if (!column_text[0]) {
-        container.push_back(make_pair(column_text[1],column_text[0]));
+        container.push_back(DBitem);
     }
     else {
-        container.push_back(make_pair(column_text[1],column_text[0]));
+        container.push_back(DBitem);
     }
     return 0;
 }
 
 /* Sorts items into tier-specific vectors */
-vector<string> tier(vector<pair<string, string>> &v, string tier){
+vector<string> tier(vector<TierItem> &v, string tier){
     vector<string> result;
         for (const auto &i: v){
-            if(!tier.compare(i.first)){
-                result.push_back(i.second);
+            if(!tier.compare(i.tier)){
+                result.push_back(i.item);
             }
         }
     return result;
@@ -67,7 +69,7 @@ void printTier(string category){
     rc = sqlite3_open("tier_A.db", &db);
 
     // Save entries to local vector 
-    vector<pair<string, string>> container;
+    vector<TierItem> container;
     sql = "SELECT * FROM " + category + ";";
     rc = sqlite3_exec(db, sql.c_str(), callback2v, &container, &zErrMsg);
 
@@ -105,5 +107,6 @@ void printTier(string category){
     printvector(tierB2);
     cout << "C :";
     printvector(tierC);
+    cout << "\n";
 
 }
