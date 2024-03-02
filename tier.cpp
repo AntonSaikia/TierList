@@ -46,6 +46,7 @@ int main() {
     std::cout << "2 - MOVIES watched in 2024\n";
     std::cin >> tier_id;   
 
+    // Select table name and item type from database
     std::string category;
     std::string item_t;
     switch(tier_id) {

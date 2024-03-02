@@ -90,6 +90,7 @@ void printTier(std::string category){
     std::vector<std::string> tierB2 = tier(container, "B");
     std::vector<std::string> tierC = tier(container, "C");
 
+    // Print Tiers
     std::cout << "S :";
     printvector(tierS);
     std::cout << "A+:";
