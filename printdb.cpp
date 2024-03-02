@@ -9,7 +9,6 @@
  */
 
 #include <iostream>
-#include <string>
 #include <vector>
 #include "printdb.h"
 #include "sqlite3/sqlite3.h"

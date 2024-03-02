@@ -11,7 +11,6 @@
 #define PRINTDB_H
 
 #include <iostream>
-#include <string>
 #include <vector>
 #include "sqlite3/sqlite3.h"
 
