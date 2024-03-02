@@ -13,27 +13,23 @@
 #include "printdb.h"
 #include "sqlite3/sqlite3.h"
 
-using namespace std;
-
 /* Sqlite callback function enter the items into a vector */
 int callback2v(void *p, int size, char **column_text, char **column_name) {
     TierItem DBitem;
-    if (size == 0) return -1;
-    auto &container = *static_cast<vector<TierItem>*>(p);
+    if (size == 0) {
+        return -1;
+    }
+    auto &container = *static_cast<std::vector<TierItem>*>(p);
     DBitem.item = column_text[0];
     DBitem.tier = column_text[1];
-    if (!column_text[0]) {
-        container.push_back(DBitem);
-    }
-    else {
-        container.push_back(DBitem);
-    }
+    container.push_back(DBitem);
+
     return 0;
 }
 
 /* Sorts items into tier-specific vectors */
-vector<string> tier(vector<TierItem> &v, string tier){
-    vector<string> result;
+std::vector<std::string> tier(std::vector<TierItem> &v, std::string tier){
+    std::vector<std::string> result;
         for (const auto &i: v){
             if(!tier.compare(i.tier)){
                 result.push_back(i.item);
@@ -43,15 +39,15 @@ vector<string> tier(vector<TierItem> &v, string tier){
 }
 
 /* Prints a tier vector */
-void printvector(vector<string> &v){
+void printvector(std::vector<std::string> &v){
     for (const auto &i: v){
-        cout << " " << i << " |";
+        std::cout << " " << i << " |";
     }
-    cout << "\n";
+    std::cout << "\n";
 }
 
 /* Takes data from the sqlite database and prints the entire tierlist*/
-void printTier(string category){
+void printTier(std::string category){
     // Pointer to SQLite connections
     sqlite3 *db;
 
@@ -62,13 +58,13 @@ void printTier(string category){
     int rc;
 
     // Save any SQL
-    string sql;
+    std::string sql;
 
     // Save the result of opening the file
     rc = sqlite3_open("tier_A.db", &db);
 
     // Save entries to local vector 
-    vector<TierItem> container;
+    std::vector<TierItem> container;
     sql = "SELECT * FROM " + category + ";";
     rc = sqlite3_exec(db, sql.c_str(), callback2v, &container, &zErrMsg);
 
@@ -77,35 +73,35 @@ void printTier(string category){
         sqlite3_free(zErrMsg);
     }
     else if(!category.compare("ANIMES")) {
-        cout << "\nAnton's Anime Tier List\n\n";
+        std::cout << "\nAnton's Anime Tier List\n\n";
     }
     else if(!category.compare("MOVIES_2024")) {
-        cout << "\nAnton's Movies watched in 2024 Tier List\n\n";
+        std::cout << "\nAnton's Movies watched in 2024 Tier List\n\n";
     }
 
     // Close the SQL connection
     sqlite3_close(db);
 
     // Sort into Tiers
-    vector<string> tierS = tier(container, "S");
-    vector<string> tierA1 = tier(container, "A+");
-    vector<string> tierA2 = tier(container, "A");
-    vector<string> tierB1 = tier(container, "B+");
-    vector<string> tierB2 = tier(container, "B");
-    vector<string> tierC = tier(container, "C");
+    std::vector<std::string> tierS = tier(container, "S");
+    std::vector<std::string> tierA1 = tier(container, "A+");
+    std::vector<std::string> tierA2 = tier(container, "A");
+    std::vector<std::string> tierB1 = tier(container, "B+");
+    std::vector<std::string> tierB2 = tier(container, "B");
+    std::vector<std::string> tierC = tier(container, "C");
 
-    cout << "S :";
+    std::cout << "S :";
     printvector(tierS);
-    cout << "A+:";
+    std::cout << "A+:";
     printvector(tierA1);
-    cout << "A :";
+    std::cout << "A :";
     printvector(tierA2);
-    cout << "B+:";
+    std::cout << "B+:";
     printvector(tierB1);
-    cout << "B :";
+    std::cout << "B :";
     printvector(tierB2);
-    cout << "C :";
+    std::cout << "C :";
     printvector(tierC);
-    cout << "\n";
+    std::cout << "\n";
 
 }

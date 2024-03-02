@@ -14,19 +14,17 @@
 #include <vector>
 #include "sqlite3/sqlite3.h"
 
-using namespace std;
-
 struct TierItem{
-    string item;
-    string tier; 
+    std::string item;
+    std::string tier; 
 };
 
 int callback2v(void *p, int size, char **column_text, char **column_name);
 
-vector<string> tier(vector<TierItem> &v, string tier);
+std::vector<std::string> tier(std::vector<TierItem> &v, std::string tier);
 
-void printvector(vector<string> &v);
+void printvector(std::vector<std::string> &v);
 
-void printTier(string category);
+void printTier(std::string category);
 
 #endif
