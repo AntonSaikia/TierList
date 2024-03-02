@@ -5,6 +5,8 @@
  * @version 1.0
  * @date 01-03-2024
  * @author A. Saikia
+ * 
+ * vim: set ft=cpp:
  *
  */
 
@@ -42,8 +44,8 @@ int main() {
     // Take tier category from console input    
     int tier_id;
     std::cout << "Enter Tier ID to select Category\n";
-    std::cout << "1 - ANIMES\n";
-    std::cout << "2 - MOVIES_2024\n";
+    std::cout << "1 - ANIMES all time\n";
+    std::cout << "2 - MOVIES watched in 2024\n";
     std::cin >> tier_id;   
 
     std::string category;
