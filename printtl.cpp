@@ -13,7 +13,7 @@
 #include "printtl.h"
 #include "sqlite3/sqlite3.h"
 
-/* Sqlite callback function enter the items into a vector */
+/* Sqlite callback function to enter the items into a vector */
 int callback2v(void *p, int size, char **column_text, char **column_name) {
     TierItem DBitem;
     if (size == 0) {
@@ -27,7 +27,7 @@ int callback2v(void *p, int size, char **column_text, char **column_name) {
     return 0;
 }
 
-/* Sorts items into tier-specific vectors */
+/* Sort items into tier-specific vectors */
 std::vector<std::string> tier(std::vector<TierItem> &v, std::string tier){
     std::vector<std::string> result;
         for (const auto &i: v){
@@ -57,7 +57,7 @@ void printTier(std::string category){
     // Save the result of opening the file
     int rc;
 
-    // Save any SQL
+    // Save any SQL query
     std::string sql;
 
     // Save the result of opening the file

@@ -23,7 +23,7 @@ int main() {
     // Save the result of opening the file
     int rc;
 
-    // Save any SQL
+    // Save any SQL query
     std::string sql;
 
     // Save the result of opening the file
