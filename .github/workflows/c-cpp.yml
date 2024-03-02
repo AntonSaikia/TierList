@@ -13,8 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: tier
-      run: ./tier
     - name: make
       run: make
+    - name: tier
+      run: ./tier
 
