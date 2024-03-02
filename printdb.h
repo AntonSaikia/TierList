@@ -5,7 +5,7 @@
  * @date 01-03-2024
  * @author A. Saikia
  * 
- * vim: set ft=cpp:
+ * vim:syntax=c++ filetype=c++
  *
  */
 
