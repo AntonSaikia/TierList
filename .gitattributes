@@ -1,3 +1,2 @@
 *.o linguist-vendored
 *.c linguist-vendored
-*.h linguist-vendored
