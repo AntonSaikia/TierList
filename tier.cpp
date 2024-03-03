@@ -42,8 +42,8 @@ int main() {
     // Take tier category from console input    
     int tier_id;
     std::cout << "Enter Tier ID to select Category\n";
-    std::cout << "1 - ANIMES all time\n";
-    std::cout << "2 - MOVIES watched in 2024\n";
+    std::cout << "[1] - ANIMES all time\n";
+    std::cout << "[2] - MOVIES watched in 2024\n";
     std::cin >> tier_id;   
 
     // Select table name and item type from database
@@ -62,9 +62,9 @@ int main() {
 
     std::string tier;
     std::string item;
-    std::cout << "Type " << item_t << " Title to Enter " << item_t << " or X to Exit and Display Tier List\n";
+    std::cout << "Type " << item_t << " Title to Enter " << item_t << " or [X] to Exit and Display Tier List\n";
     while(getline(std::cin >> std::ws, item) && item.compare("X")){
-        std::cout << "Type Tier [S, A+ , A, B+, B, C]" << '\n';
+        std::cout << "Type Tier [S] [A+] [A] [B+] [B] [C]" << '\n';
         getline(std::cin, tier);
         // Save SQL insert data
         sql = "INSERT INTO " + category + " (" + item_t + ", Tier) "  \
@@ -73,12 +73,13 @@ int main() {
         // Run the SQL (convert the string to a C-String with c_str() )
         rc = sqlite3_exec(db, sql.c_str(), 0, 0, &zErrMsg);
 
-        std::cout << "Type " << item_t << " Title to Enter " << item_t << " or X to Exit and Display Tier List\n";
+        std::cout << "Type " << item_t << " Title to Enter " << item_t << " or [X] to Exit and Display Tier List\n";
     }
     
     // Close the SQL connection
     sqlite3_close(db);
 
+    // Print Tierlist
     printTier(category);
     
     return 0;
