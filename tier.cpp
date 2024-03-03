@@ -64,9 +64,8 @@ int main() {
     std::string item;
     std::cout << "Type " << item_t << " Title to Enter " << item_t << " or X to Exit and Display Tier List\n";
     while(getline(std::cin >> std::ws, item) && item.compare("X")){
-        std::cout << "Type Tier" << '\n';
+        std::cout << "Type Tier [S, A+ , A, B+, B, C]" << '\n';
         getline(std::cin, tier);
-        std::cout << tier_id << "\n";
         // Save SQL insert data
         sql = "INSERT INTO " + category + " (" + item_t + ", Tier) "  \
                 "VALUES ('" + item + "','" + tier + "'); " ;

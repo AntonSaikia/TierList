@@ -4,7 +4,7 @@
 #	gcc -o sqlite3/sqlite3.o -c sqlite3/sqlite3.c
 
 ## Create main executable
-tier: tier.cpp printdb.cpp
+tier: tier.cpp printtl.cpp
 	g++ $^ sqlite3/sqlite3.o -o $@
 
 ## Remove executables
