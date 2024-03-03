@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <string>
-#include "printtl.h"
+#include "printtl.hpp"
 #include "sqlite3/sqlite3.h"
 
 int main() {
