@@ -39,12 +39,12 @@ int main() {
     }
 
 
-    // Take tier category from console input    
+    // Take tier category from console input
     int tier_id;
     std::cout << "Enter Tier ID to select Category\n";
     std::cout << "[1] - ANIMES all time\n";
     std::cout << "[2] - MOVIES watched in 2024\n";
-    std::cin >> tier_id;   
+    std::cin >> tier_id;
 
     // Select table name and item type from database
     std::string category;
@@ -75,12 +75,12 @@ int main() {
 
         std::cout << "Type " << item_t << " Title to Enter " << item_t << " or [X] to Exit and Display Tier List\n";
     }
-    
+
     // Close the SQL connection
     sqlite3_close(db);
 
     // Print Tierlist
     printTier(category);
-    
+
     return 0;
 }
