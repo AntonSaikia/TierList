@@ -5,6 +5,7 @@
 - Program sorts and prints items in a tierlist
 
   `make build` to compile
+  
   `make run` or `./tier` to run
 
 **Sample Tier List output:**
