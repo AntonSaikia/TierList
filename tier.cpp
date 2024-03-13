@@ -58,6 +58,9 @@ int main() {
             category = "MOVIES_2024";
             item_t = "Movie";
             break;
+        default:
+            std::cout << "Incorrect input\n";
+            return 0;
     }
 
     std::string tier;
