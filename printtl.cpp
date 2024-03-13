@@ -28,11 +28,11 @@ int callback2v(void *p, int size, char **column_text, char **column_name) {
 }
 
 /* Sort items into tier-specific vectors */
-std::vector<std::string> tier(std::vector<TierItem> &v, std::string tier){
+std::vector<std::string> tier(std::vector<TierItem> &v, std::string tier_id){
     std::vector<std::string> result;
-    for (const auto &i: v){
-        if(!tier.compare(i.tier)){
-            result.push_back(i.item);
+    for (const auto &[item, tier]: v){
+        if(!tier_id.compare(tier)){
+            result.push_back(item);
         }
     }
     return result;
